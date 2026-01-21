@@ -8,14 +8,15 @@ import {
   Plane, 
   Ship, 
   CheckCircle2, 
-  ArrowRight, 
-  Award, 
-  Clock, 
-  ShieldCheck, 
-  Menu, 
-  X,
-  ExternalLink,
-  ChevronRight
+  ArrowUpRight,
+  Instagram,
+  Facebook,
+  Linkedin,
+  Clock,
+  ShieldCheck,
+  ChevronRight,
+  Menu,
+  X
 } from 'lucide-vue-next'
 
 const email = ref('')
@@ -37,7 +38,6 @@ onUnmounted(() => {
 
 const handleSubmit = () => {
   if (email.value) {
-    console.log('Email collected:', email.value)
     isSubmitted.value = true
     email.value = ''
     setTimeout(() => {
@@ -48,411 +48,352 @@ const handleSubmit = () => {
 
 const services = [
   {
+    tag: "LOGISTIQUE",
     title: "Excédents de Bagages",
-    description: "Solution économique pour vos bagages supplémentaires. Voyagez léger et nous nous occupons du reste.",
-    icon: Ship,
-    features: ["Enlèvement à domicile", "Tarifs préférentiels", "Suivi en temps réel"],
-    color: "blue"
+    description: "Une gestion simplifiée de vos surplus de poids. KEMET prend en charge l'acheminement de vos bagages personnels avec une sécurité absolue et des tarifs négociés.",
+    image: "/images/hero-bg.png",
+    link: "https://wa.me/237655437070"
   },
   {
+    tag: "EXPORT",
     title: "Fret Aérien (Air Freight)",
-    description: "Transport international rapide et sécurisé pour vos marchandises vers toutes les destinations mondiales.",
-    icon: Plane,
-    features: ["Express & Standard", "Dédouanement", "Logistique porte-à-porte"],
-    color: "indigo"
+    description: "Le monde n'a plus de frontières. Nous assurons le transport de vos marchandises prioritaires avec une réactivité qui définit les nouveaux standards du marché.",
+    image: "/images/hero-bg.png",
+    link: "https://wa.me/237655437070"
   },
   {
+    tag: "TRAVEL",
     title: "Voyages & Billetterie",
-    description: "Votre partenaire de voyage complet. Réservation de billets, planification de séjours et conseils experts.",
-    icon: Globe,
-    features: ["Meilleurs tarifs", "Assistance 24/7", "Partenaire Kenya Airways"],
-    color: "purple"
-  }
-]
-
-const whyUs = [
-  {
-    title: "Expertise Reconnue",
-    description: "Des années d'expérience dans la logistique internationale et le voyage.",
-    icon: Award
-  },
-  {
-    title: "Fiabilité Maximale",
-    description: "Une sécurité garantie pour vos biens et une sérénité pour vos voyages.",
-    icon: ShieldCheck
-  },
-  {
-    title: "Réactivité",
-    description: "Une équipe dédiée pour répondre à vos besoins dans les plus brefs délais.",
-    icon: Clock
+    description: "En tant que partenaire privilégié de Kenya Airways, nous vous offrons l'accès aux meilleures routes et tarifs pour vos déplacements professionnels et personnels.",
+    image: "/images/hero-bg.png",
+    link: "https://wa.me/237655437070"
   }
 ]
 
 useSeoMeta({
-  title: 'KEMET Group - Votre pont logistique avec le monde',
-  description: 'Solutions de logistique internationale, fret aérien et voyages. Partenaire de Kenya Airways. Une nouvelle expérience arrive bientôt.',
-  ogTitle: 'KEMET Group - Logistique & Voyage',
-  ogDescription: 'Une nouvelle plateforme logistique et de voyage arrive bientôt.',
+  title: 'KEMET Group | Votre Pont Logistique avec le Monde',
+  description: 'Excellence en logistique internationale et solutions de voyage. Partenaire officiel Kenya Airways.',
+  ogTitle: 'KEMET Group - Excellence Logistique',
   ogImage: '/images/hero-bg.png',
-  twitterCard: 'summary_large_image',
 })
 </script>
 
 <template>
-  <div class="relative min-h-screen bg-slate-950 font-sans selection:bg-blue-500/30 text-slate-200">
-    
-    <!-- Navbar -->
+  <div class="relative min-h-screen bg-[#020617] text-slate-400 selection:bg-[#D4AF37]/30 overflow-x-hidden">
+    <!-- Tactile Noise Texture -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
     <nav 
-      class="fixed top-0 inset-x-0 z-50 transition-all duration-500"
-      :class="[scrolled ? 'bg-slate-950/80 backdrop-blur-xl border-b border-white/10 py-4 shadow-lg' : 'bg-transparent py-6']"
+      class="fixed top-0 inset-x-0 z-[100] transition-all duration-700 ease-in-out"
+      :class="[scrolled ? 'bg-[#020617]/90 backdrop-blur-md border-b border-white/5 py-5' : 'bg-transparent py-10']"
     >
-      <div class="container mx-auto px-6 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <img src="/images/logo.png" alt="KEMET Logo" class="h-10 w-auto" />
-          <span class="text-xl font-bold tracking-tight text-white hidden sm:block">KEMET <span class="gradient-text">Group</span></span>
+      <div class="container mx-auto px-6 md:px-12 flex items-center justify-between">
+        <div class="flex items-center gap-4 group cursor-pointer">
+          <img src="/images/logo.png" alt="KEMET Logo" class="h-12 w-auto grayscale brightness-200 contrast-125 group-hover:grayscale-0 transition-all duration-500" />
+          <div class="flex flex-col">
+            <span class="text-xl font-bold tracking-[0.1em] text-white">KEMET</span>
+            <span class="text-[10px] tracking-[0.3em] font-bold text-[#D4AF37] uppercase">Group FZE LLC</span>
+          </div>
         </div>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#services" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Services</a>
-          <a href="#about" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Pourquoi Nous ?</a>
-          <a href="#contact" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Contact</a>
-          <a href="https://wa.me/237655437070" target="_blank" class="btn-primary py-2 px-5 text-sm flex items-center gap-2">
-            <MessageSquare class="w-4 h-4" />
-            Parler sur WhatsApp
+        <!-- Desktop Links -->
+        <div class="hidden lg:flex items-center gap-12 font-bold uppercase tracking-[0.2em] text-[11px]">
+          <a href="#about" class="hover:text-[#D4AF37] transition-colors">Vision</a>
+          <a href="#services" class="hover:text-[#D4AF37] transition-colors">Expertise</a>
+          <a href="#contact" class="hover:text-[#D4AF37] transition-colors">Contact</a>
+          <div class="h-8 w-[1px] bg-white/10"></div>
+          <a href="https://wa.me/237655437070" target="_blank" class="text-white hover:text-[#D4AF37] transition-colors flex items-center gap-2 group">
+            WhatsApp
+            <ArrowUpRight class="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
         </div>
 
-        <!-- Mobile Menu Toggle -->
-        <button @click="isMenuOpen = !isMenuOpen" class="md:hidden text-white p-2">
+        <button @click="isMenuOpen = !isMenuOpen" class="lg:hidden text-white p-2">
           <Menu v-if="!isMenuOpen" class="w-6 h-6" />
           <X v-else class="w-6 h-6" />
         </button>
       </div>
 
-      <!-- Mobile Menu -->
+      <!-- Mobile Nav -->
       <transition 
-        enter-active-class="transition duration-300 ease-out"
-        enter-from-class="opacity-0 -translate-y-4"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition duration-200 ease-in"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 -translate-y-4"
+        enter-active-class="transition duration-500 ease-out"
+        enter-from-class="opacity-0 translate-x-full"
+        enter-to-class="opacity-100 translate-x-0"
+        leave-active-class="transition duration-300 ease-in"
+        leave-from-class="opacity-100 translate-x-0"
+        leave-to-class="opacity-0 translate-x-full"
       >
-        <div v-if="isMenuOpen" class="md:hidden absolute top-full inset-x-0 bg-slate-900 border-b border-white/10 p-6 flex flex-col gap-6 shadow-2xl">
-          <a href="#services" @click="isMenuOpen = false" class="text-lg font-medium">Services</a>
-          <a href="#about" @click="isMenuOpen = false" class="text-lg font-medium">Pourquoi Nous ?</a>
-          <a href="#contact" @click="isMenuOpen = false" class="text-lg font-medium">Contact</a>
-          <a href="https://wa.me/237655437070" @click="isMenuOpen = false" class="btn-primary text-center">Contact WhatsApp</a>
+        <div v-if="isMenuOpen" class="fixed inset-y-0 right-0 w-full bg-[#0F172A] z-50 p-12 flex flex-col justify-center gap-12 text-center lg:hidden">
+          <a href="#about" @click="isMenuOpen = false" class="text-4xl font-serif italic text-white">Vision</a>
+          <a href="#services" @click="isMenuOpen = false" class="text-4xl font-serif italic text-white">Expertise</a>
+          <a href="#contact" @click="isMenuOpen = false" class="text-4xl font-serif italic text-white">Contact</a>
+          <div class="pt-12 border-t border-white/10">
+            <a href="https://wa.me/237655437070" class="btn-bespoke py-4 block">WhatsApp Direct</a>
+          </div>
         </div>
       </transition>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex flex-col items-center justify-center pt-20 overflow-hidden">
-      <!-- Background -->
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/80 to-slate-950 z-10"></div>
-        <img 
-          src="/images/hero-bg.png" 
-          alt="Logistics Background" 
-          class="w-full h-full object-cover scale-105 animate-slow-zoom blur-[2px]"
-        />
-        <div class="absolute top-[20%] left-[-5%] w-[50%] h-[50%] bg-blue-600/10 blur-[150px] rounded-full animate-pulse-slow"></div>
-        <div class="absolute bottom-[20%] right-[-5%] w-[50%] h-[50%] bg-indigo-600/10 blur-[150px] rounded-full animate-pulse-slow"></div>
-      </div>
+    <!-- Hero Section: Editorial Style -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-20">
+      <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-8 z-10 space-y-12">
+          <div class="inline-flex items-baseline gap-4">
+            <span class="h-[1px] w-12 bg-[#D4AF37]"></span>
+            <span class="text-xs font-bold tracking-[0.4em] uppercase text-[#D4AF37]">Coming Soon 2026</span>
+          </div>
 
-      <div class="relative z-20 container mx-auto px-6 text-center max-w-5xl">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold mb-8 animate-fade-in shadow-glow-blue">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-          </span>
-          PROCHAINEMENT : VOTRE NOUVELLE PLATEFORME
+          <h1 class="text-6xl md:text-9xl font-bold leading-[0.9] text-white tracking-tighter">
+            Votre <span class="editorial-heading">pont</span><br />
+            vers l'infini.
+          </h1>
+
+          <p class="text-xl md:text-2xl font-light text-slate-400 max-w-xl leading-relaxed">
+            KEMET Group redéfinit les frontières du transport et de la logistique. Une expérience sur mesure, ancrée dans la fiabilité, arrive bientôt.
+          </p>
+
+          <div class="flex flex-wrap gap-8 pt-8 items-center">
+            <a href="#contact" class="btn-bespoke">M'informer du lancement</a>
+            <div class="flex items-center gap-4 text-xs font-bold">
+              <span class="text-white/30 tracking-widest uppercase">Trusted By</span>
+              <span class="text-white tracking-tighter italic text-lg opacity-60">Kenya Airways</span>
+            </div>
+          </div>
         </div>
 
-        <h1 class="text-5xl md:text-8xl font-black text-white leading-[1.1] mb-8 animate-fade-up" style="animation-duration: 1s;">
-          Connecter <span class="gradient-text">vos ambitions</span><br />
-          au reste du monde.
-        </h1>
-
-        <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-12 animate-fade-up font-light leading-relaxed" style="animation-delay: 0.2s;">
-          KEMET Group révolutionne le transport de bagages et la logistique internationale. Un pont fiable, rapide et intelligent arrive bientôt.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-up" style="animation-delay: 0.4s;">
-          <a href="#services" class="btn-primary w-full sm:w-auto text-lg px-10 py-4 flex items-center justify-center gap-3">
-            Découvrir nos services
-            <ArrowRight class="w-5 h-5" />
-          </a>
-          <a href="#contact" class="w-full sm:w-auto px-10 py-4 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all text-lg font-medium text-white flex items-center justify-center gap-3">
-            Nous contacter
-          </a>
+        <!-- Asymmetric Image Placement -->
+        <div class="lg:col-span-4 relative mt-20 lg:mt-0">
+          <div class="relative w-full aspect-[3/4] overflow-hidden shadow-[30px_30px_0px_#D4AF3715]">
+            <img 
+              src="/images/hero-bg.png" 
+              alt="Logistics Detail" 
+              class="w-full h-full object-cover grayscale brightness-75 contrast-125 hover:grayscale-0 transition-all duration-1000 ease-in-out cursor-crosshair scale-110"
+            />
+            <div class="absolute bottom-10 -left-10 bg-[#D4AF37] text-[#0F172A] p-8 max-w-[200px] shadow-2xl">
+              <span class="text-4xl font-serif italic font-bold">99%</span>
+              <p class="text-[10px] font-bold uppercase tracking-wider mt-2">D'efficacité opérationnelle garantie.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-32 relative">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-20 space-y-4">
-          <h2 class="text-4xl md:text-6xl font-bold text-white">Nos <span class="gradient-text">Services Excellence</span></h2>
-          <p class="text-slate-400 max-w-2xl mx-auto text-lg">Solutions logistiques sur mesure pour particuliers et entreprises.</p>
+    <!-- Vision Section -->
+    <section id="about" class="py-32 bg-[#0F172A]/30 border-y border-white/5">
+      <div class="container mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-end">
+          <div class="space-y-12">
+            <h2 class="text-5xl md:text-7xl font-bold text-white tracking-tight">
+              L'excellence <br />
+              est notre <br />
+              <span class="editorial-heading">seul itinéraire.</span>
+            </h2>
+          </div>
+          <div class="space-y-8 pb-12">
+            <p class="text-lg leading-relaxed text-slate-400">
+              KEMET Group n’est pas qu’une société de logistique. C’est un partenaire stratégique conçu pour éliminer les barrières de la distance. Que ce soit pour vos colis volumineux ou vos déplacements internationaux, nous appliquons une rigueur de haute horlogerie à chaque mouvement.
+            </p>
+            <div class="flex gap-12 pt-8">
+              <div class="space-y-2">
+                <span class="text-[#D4AF37] block text-2xl font-serif italic">Global</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest">Couverture Afrique/Monde</span>
+              </div>
+              <div class="space-y-2">
+                <span class="text-[#D4AF37] block text-2xl font-serif italic">Safe</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest">Suivi certifié KMTrack</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services: Editorial Cards -->
+    <section id="services" class="py-40">
+      <div class="container mx-auto px-6 md:px-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-32 border-b border-white/10 pb-12 gap-8">
+          <div class="space-y-4">
+            <span class="text-[#D4AF37] text-xs font-bold tracking-[0.3em] uppercase">Nos Expertises</span>
+            <h2 class="text-5xl md:text-6xl font-bold text-white tracking-tighter">Nos Solutions Groupées</h2>
+          </div>
+          <p class="max-w-xs text-sm leading-relaxed text-slate-500 font-medium">
+            Une gamme complète de services conçus pour répondre aux exigences les plus strictes de la logistique moderne.
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="space-y-24">
           <div 
             v-for="(service, index) in services" 
-            :key="index"
-            class="glass-card group hover:bg-white/10 transition-all duration-500 p-8 flex flex-col animate-fade-up shadow-highlight"
-            :style="{ animationDelay: (0.2 * index) + 's' }"
+            :key="service.title"
+            class="group grid grid-cols-1 md:grid-cols-12 gap-12 items-center"
           >
-            <div class="mb-8 p-4 rounded-2xl w-fit transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
-                 :class="[service.color === 'blue' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' : 
-                          service.color === 'indigo' ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 
-                          'bg-purple-500/10 text-purple-400 border border-purple-500/20']">
-              <component :is="service.icon" class="w-10 h-10" />
+            <!-- Even/Odd layout switch -->
+            <div :class="[index % 2 === 0 ? 'md:col-span-5' : 'md:col-span-5 md:order-2', 'space-y-8']">
+              <span class="text-[10px] font-bold tracking-[0.5em] text-[#D4AF37] uppercase opacity-70">{{ service.tag }}</span>
+              <h3 class="text-4xl md:text-5xl font-bold text-white transition-colors group-hover:text-[#D4AF37]">{{ service.title }}</h3>
+              <p class="text-lg leading-relaxed text-slate-400 font-light">{{ service.description }}</p>
+              <a :href="service.link" target="_blank" class="inline-flex items-center gap-4 text-white font-bold tracking-widest text-[10px] uppercase group/link">
+                Contacter un expert 
+                <div class="w-8 h-[1px] bg-[#D4AF37] group-hover/link:w-16 transition-all duration-500"></div>
+                <ChevronRight class="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
+              </a>
             </div>
             
-            <h3 class="text-2xl font-bold text-white mb-4">{{ service.title }}</h3>
-            <p class="text-slate-400 mb-8 leading-relaxed">{{ service.description }}</p>
-            
-            <ul class="space-y-4 mb-8 flex-1">
-              <li v-for="feature in service.features" :key="feature" class="flex items-center gap-3 text-sm text-slate-300">
-                <CheckCircle2 class="w-5 h-5 text-blue-500" />
-                {{ feature }}
-              </li>
-            </ul>
-
-            <button class="mt-auto flex items-center gap-2 text-white font-semibold group/btn">
-              En savoir plus
-              <ChevronRight class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-            </button>
+            <div :class="[index % 2 === 0 ? 'md:col-span-7' : 'md:col-span-7 md:order-1']">
+              <div class="relative overflow-hidden aspect-video bg-white/5 border border-white/10">
+                <img 
+                  :src="service.image" 
+                  class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 contrast-110 brightness-75"
+                />
+                <div class="absolute inset-0 bg-[#020617]/20 group-hover:bg-transparent transition-colors duration-500"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Us Section (Trust) -->
-    <section id="about" class="py-24 bg-white/[0.02]">
-      <div class="container mx-auto px-6">
-        <div class="flex flex-col lg:flex-row items-center gap-20">
-          <div class="flex-1 space-y-8 max-w-2xl">
-            <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight">
-              Pourquoi faire confiance à <br />
-              <span class="gradient-text">KEMET Group ?</span>
+    <!-- Newsletter: High Contrast Call -->
+    <section class="py-40 bg-white text-[#0F172A] relative overflow-hidden">
+      <div class="container mx-auto px-6 md:px-24">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div class="space-y-12">
+            <h2 class="text-5xl md:text-7xl font-bold leading-tight tracking-tighter">
+              Faites partie du <br />
+              <span class="font-serif italic text-[#D4AF37]">prochain chapitre.</span>
             </h2>
-            <p class="text-xl text-slate-400 font-light leading-relaxed">
-              Nous ne transportons pas seulement des biens, nous transportons des promesses. Notre engagement envers l'excellence fait de nous le partenaire idéal pour vos besoins internationaux.
+            <p class="text-xl opacity-70 leading-relaxed font-medium">
+              Nous levons le voile très prochainement. Soyez informés avant tout le monde des offres exclusives de lancement.
             </p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div v-for="item in whyUs" :key="item.title" class="flex flex-col gap-4">
-                <div class="p-3 bg-blue-500/10 rounded-xl border border-blue-500/20 w-fit">
-                  <component :is="item.icon" class="w-6 h-6 text-blue-400" />
-                </div>
-                <h4 class="text-lg font-bold text-white">{{ item.title }}</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">{{ item.description }}</p>
-              </div>
-            </div>
           </div>
-
-          <div class="flex-1 w-full lg:max-w-md relative group">
-            <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur-2xl opacity-20 group-hover:opacity-30 transition duration-500"></div>
-            <div class="glass-card p-10 relative space-y-8">
-              <div class="flex items-center gap-4 text-slate-500 text-xs font-bold tracking-[0.2em] uppercase">
-                Notre Partenaire Majeur
-              </div>
-              <div class="flex flex-col gap-6">
-                <span class="text-4xl md:text-5xl font-black italic text-white tracking-tighter opacity-80">KENYA AIRWAYS</span>
-                <p class="text-slate-400 leading-relaxed text-sm">
-                  Grâce à notre partenariat stratégique avec Kenya Airways, nous garantissons des routes optimales et une sécurité accrue pour tous vos envois et vos voyages.
-                </p>
-                <div class="flex items-center gap-2 text-blue-400 font-medium">
-                  <Globe class="w-4 h-4" />
-                  <span>Réseau Global Pan-Africain</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Newsletter CTA -->
-    <section class="py-32 relative overflow-hidden">
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none"></div>
-      
-      <div class="container mx-auto px-6 max-w-4xl text-center relative z-10">
-        <div class="glass-card md:p-16 p-8 shadow-3xl hover:border-white/20 transition-all duration-700">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Soyez les premiers informés</h2>
-          <p class="text-slate-400 text-lg mb-12 max-w-xl mx-auto">
-            Inscrivez-vous pour recevoir des notifications sur notre lancement officiel et nos offres exclusives d'ouverture.
-          </p>
-
-          <form @submit.prevent="handleSubmit" class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-            <div class="flex-1 relative group">
-              <Mail class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-blue-500 transition-colors" />
-              <input 
-                v-model="email"
-                type="email" 
-                placeholder="votre@email.com" 
-                required
-                class="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-white placeholder:text-slate-500"
-              />
-            </div>
-            <button 
-              type="submit" 
-              class="btn-primary flex items-center justify-center gap-2 px-8 py-4 whitespace-nowrap"
-              :disabled="isSubmitted"
-            >
-              <span>{{ isSubmitted ? 'Inscription réussie !' : "M'inscrire" }}</span>
-              <Send v-if="!isSubmitted" class="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              <CheckCircle2 v-else class="w-4 h-4 text-green-400" />
-            </button>
-          </form>
           
-          <p v-if="isSubmitted" class="mt-6 text-green-400 font-medium flex items-center justify-center gap-2 animate-bounce">
-            <CheckCircle2 class="w-5 h-5" />
-            Vérifiez votre boîte mail prochainement !
-          </p>
+          <div class="relative">
+            <form @submit.prevent="handleSubmit" class="space-y-8">
+              <div class="relative group">
+                <input 
+                  v-model="email"
+                  type="email" 
+                  placeholder="votre@email.com" 
+                  required
+                  class="w-full bg-transparent border-b-2 border-[#0F172A]/10 py-8 text-2xl font-bold outline-none focus:border-[#D4AF37] transition-all placeholder:text-[#0F172A]/20"
+                />
+              </div>
+              <button 
+                type="submit" 
+                class="btn-bespoke w-full"
+                :disabled="isSubmitted"
+              >
+                {{ isSubmitted ? 'Merci pour votre confiance' : "S'inscrire à l'avant-première" }}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact" class="pt-24 pb-12 bg-slate-900 border-t border-white/5">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-          <div class="col-span-1 md:col-span-2 space-y-6">
-            <div class="flex items-center gap-3">
-              <img src="/images/logo.png" alt="KEMET Logo" class="h-10 w-auto" />
-              <span class="text-2xl font-bold tracking-tight text-white">KEMET <span class="gradient-text">Group</span></span>
+    <!-- Footer: Industrial Chic -->
+    <footer id="contact" class="bg-[#020617] border-t border-white/5 pt-40 pb-20">
+      <div class="container mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 mb-40">
+          
+          <div class="lg:col-span-6 space-y-12">
+            <div class="flex flex-col gap-2">
+              <span class="text-4xl font-bold text-white tracking-widest uppercase">KEMET</span>
+              <span class="text-[#D4AF37] font-bold tracking-[0.4em] uppercase text-xs">Group FZE LLC</span>
             </div>
-            <p class="text-slate-500 max-w-md leading-relaxed">
-              KEMET Group & KEMET Travel & Tours. Votre pont logistique avec le monde. Spécialiste de la logistique internationale et du voyage d'excellence.
-            </p>
-            <div class="flex items-center gap-6">
-              <a href="#" class="p-3 bg-white/5 rounded-full hover:bg-white/10 transition-colors">
-                <Globe class="w-5 h-5 text-slate-400" />
-              </a>
-              <a href="#" class="p-3 bg-white/5 rounded-full hover:bg-white/10 transition-colors">
-                <ExternalLink class="w-5 h-5 text-slate-400" />
-              </a>
-            </div>
-          </div>
-
-          <div class="space-y-6">
-            <h4 class="text-white font-bold opacity-80 uppercase tracking-widest text-xs">Navigation</h4>
-            <ul class="space-y-4 text-slate-400">
-              <li><a href="#" class="hover:text-blue-400 transition-colors">Accueil</a></li>
-              <li><a href="#services" class="hover:text-blue-400 transition-colors">Nos Services</a></li>
-              <li><a href="#about" class="hover:text-blue-400 transition-colors">À Propos</a></li>
-            </ul>
-          </div>
-
-          <div class="space-y-6">
-            <h4 class="text-white font-bold opacity-80 uppercase tracking-widest text-xs">Contact Rapid</h4>
-            <div class="space-y-4 text-slate-400">
-              <a href="mailto:travel@bkemet.com" class="flex items-center gap-3 hover:text-white transition-colors group">
-                <Mail class="w-5 h-5 text-blue-500" />
-                <span>travel@bkemet.com</span>
-              </a>
-              <a href="https://wa.me/237655437070" class="flex items-center gap-3 hover:text-white transition-colors group">
-                <MessageSquare class="w-5 h-5 text-green-500" />
-                <span>+237 655 43 70 70</span>
-              </a>
-              <div class="flex items-start gap-3">
-                <Phone class="w-5 h-5 text-blue-500 mt-1" />
-                <span>Cameroun & International</span>
+            <div class="space-y-8">
+              <div class="flex flex-col gap-2">
+                <span class="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Email</span>
+                <a href="mailto:travel@bkemet.com" class="text-2xl md:text-3xl text-white hover:text-[#D4AF37] font-serif transition-all italic underline decoration-[#D4AF37]/30">travel@bkemet.com</a>
               </div>
+              <div class="flex flex-col gap-2">
+                <span class="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Phone & WhatsApp</span>
+                <a href="tel:+237655437070" class="text-2xl md:text-3xl text-white hover:text-[#D4AF37] font-serif transition-all italic">+237 655 43 70 70</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 grid grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="space-y-8 text-xs">
+              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40">Navigation</span>
+              <ul class="space-y-4 font-bold uppercase tracking-widest text-[#94a3b8]">
+                <li><a href="#" class="hover:text-white">Accueil</a></li>
+                <li><a href="#about" class="hover:text-white">Vision</a></li>
+                <li><a href="#services" class="hover:text-white">Expertise</a></li>
+              </ul>
+            </div>
+            
+            <div class="space-y-8 text-xs">
+              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40">Social</span>
+              <ul class="space-y-4 font-bold uppercase tracking-widest text-[#94a3b8]">
+                <li><a href="#" class="hover:text-white">Linkedin</a></li>
+                <li><a href="#" class="hover:text-white">Instagram</a></li>
+                <li><a href="#" class="hover:text-white">Facebook</a></li>
+              </ul>
+            </div>
+
+            <div class="space-y-8 text-xs col-span-2 lg:col-span-1">
+              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40">Addresse</span>
+              <p class="font-bold uppercase tracking-widest text-[#94a3b8] leading-relaxed">
+                Douala, Cameroun<br />
+                FZE LLC Registration
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="border-t border-white/5 pt-12 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-slate-600">
-          <p>&copy; {{ new Date().getFullYear() }} KEMET Group & KEMET Travel & Tours. Tous droits réservés.</p>
-          <div class="flex items-center gap-8">
-            <a href="#" class="hover:text-slate-400">Politique de confidentialité</a>
-            <a href="#" class="hover:text-slate-400">Mentions Légales</a>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-12 border-t border-white/5 pt-20">
+          <p class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">
+            &copy; {{ new Date().getFullYear() }} KEMET Group. Excellence since inception.
+          </p>
+          <div class="flex gap-12 grayscale opacity-40 hover:opacity-100 transition-all duration-1000">
+             <span class="text-sm font-black italic tracking-tighter text-white">OFFICIAL PARTNER OF KENYA AIRWAYS</span>
+          </div>
+          <div class="flex gap-8 text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">
+            <a href="#" class="hover:opacity-100">Privacy</a>
+            <a href="#" class="hover:opacity-100">Legal</a>
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Floating WhatsApp CTA -->
-    <a 
-      href="https://wa.me/237655437070" 
-      target="_blank"
-      class="fixed bottom-8 right-8 z-[100] p-4 bg-green-600 hover:bg-green-500 text-white rounded-full shadow-2xl shadow-green-600/20 transition-all duration-300 hover:scale-110 group flex items-center gap-3"
-    >
-      <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 font-medium">Besoin d'aide ?</span>
-      <MessageSquare class="w-6 h-6" />
-    </a>
+    <!-- Floating Global Connection Marker -->
+    <div class="fixed bottom-12 left-12 z-50 hidden md:block group cursor-none">
+      <div class="w-12 h-12 border border-[#D4AF37]/30 flex items-center justify-center transform group-hover:rotate-45 transition-all duration-700">
+          <Globe class="w-4 h-4 text-[#D4AF37]" />
+      </div>
+    </div>
 
   </div>
 </template>
 
 <style>
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 0.4; }
-}
-
 @keyframes slow-zoom {
-  0% { transform: scale(1.05); }
+  0% { transform: scale(1.1); }
   50% { transform: scale(1.15); }
-  100% { transform: scale(1.05); }
+  100% { transform: scale(1.1); }
 }
 
-.animate-fade-in { animation: fade-in 1.2s ease-out forwards; }
-.animate-fade-up { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.animate-pulse-slow { animation: pulse-slow 8s infinite ease-in-out; }
-.animate-slow-zoom { animation: slow-zoom 25s infinite ease-in-out; }
-
-.shadow-glow-blue {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
-}
-
-.shadow-highlight {
-  position: relative;
-  overflow: hidden;
-}
-
-.shadow-highlight::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent 60%);
-  pointer-events: none;
-}
+.animate-slow-zoom { animation: slow-zoom 30s infinite ease-in-out; }
 
 html {
   scroll-behavior: smooth;
+  background-color: #020617;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar Editorial */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: #020617;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 10px;
+  background: #D4AF37;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: white;
 }
 </style>
