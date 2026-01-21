@@ -9,14 +9,15 @@ import {
   Ship, 
   CheckCircle2, 
   ArrowUpRight,
-  Instagram,
-  Facebook,
-  Linkedin,
   Clock,
   ShieldCheck,
   ChevronRight,
   Menu,
-  X
+  X,
+  Package,
+  Truck,
+  FileCheck,
+  HelpCircle
 } from 'lucide-vue-next'
 
 const email = ref('')
@@ -70,24 +71,102 @@ const services = [
   }
 ]
 
+const steps = [
+  {
+    icon: Package,
+    title: "Collecte & Inventaire",
+    description: "Nous réceptionnons et répertorions vos biens avec une précision chirurgicale, garantissant une intégrité totale dès le départ."
+  },
+  {
+    icon: FileCheck,
+    title: "Expertise Douanière",
+    description: "KEMET Group gère l'intégralité de la documentation et des formalités administratives pour un transit fluide."
+  },
+  {
+    icon: Truck,
+    title: "Acheminement Sécurisé",
+    description: "Grâce à notre réseau mondial et au partenariat Kenya Airways, vos colis arrivent à destination en temps record."
+  }
+]
+
+const faqs = [
+  {
+    q: "Quelles zones couvrez-vous ?",
+    a: "Nous opérons une couverture mondiale avec une expertise spécifique sur les corridors Cameroun-International et les hubs FZE."
+  },
+  {
+    q: "Proposez-vous une assurance ?",
+    a: "Oui, chaque envoi bénéficie de nos protocoles de sécurité et peut être couvert par nos assurances partenaires spécialisées."
+  }
+]
+
 useSeoMeta({
   title: 'KEMET Group | Votre Pont Logistique avec le Monde',
-  description: 'Excellence en logistique internationale et solutions de voyage. Partenaire officiel Kenya Airways.',
+  description: 'Excellence en logistique internationale, fret aérien et solutions de voyage. Partenaire officiel Kenya Airways.',
   ogTitle: 'KEMET Group - Excellence Logistique',
+  ogDescription: 'Une nouvelle dimension de la logistique et du voyage arrive prochainement.',
   ogImage: '/images/hero-bg.png',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'KEMET Group | Logistique & Voyage',
+  twitterDescription: 'Redéfinir les frontières du transport international.',
+  twitterImage: '/images/hero-bg.png',
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        'name': 'KEMET Group',
+        'url': 'https://bkemet.com',
+        'logo': 'https://bkemet.com/images/logo.png',
+        'contactPoint': {
+          '@type': 'ContactPoint',
+          'telephone': '+237655437070',
+          'contactType': 'customer service',
+          'email': 'travel@bkemet.com',
+          'availableLanguage': ['French', 'English']
+        },
+        'sameAs': [
+          'https://facebook.com/bkemet',
+          'https://linkedin.com/company/bkemet',
+          'https://instagram.com/bkemet'
+        ]
+      })
+    },
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        'serviceType': 'Logistics and International Travel',
+        'provider': {
+          '@type': 'Organization',
+          'name': 'KEMET Group'
+        },
+        'areaServed': 'WorldWide',
+        'description': 'International logistics, air freight, and premium travel services.'
+      })
+    }
+  ]
 })
 </script>
 
 <template>
-  <div class="relative min-h-screen bg-[#020617] text-slate-400 selection:bg-[#D4AF37]/30 overflow-x-hidden">
+  <div class="relative min-h-screen bg-[#020617] text-slate-400 selection:bg-[#D4AF37]/30 overflow-x-hidden" role="document">
     <!-- Tactile Noise Texture -->
-    <div class="noise-overlay"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
     <!-- Navigation -->
     <nav 
       class="fixed top-0 inset-x-0 z-[100] transition-all duration-700 ease-in-out"
       :class="[scrolled ? 'bg-[#020617]/90 backdrop-blur-md border-b border-white/5 py-5' : 'bg-transparent py-10']"
+      aria-label="Menu principal"
     >
+
       <div class="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <div class="flex items-center gap-4 group cursor-pointer">
           <img src="/images/logo.png" alt="KEMET Logo" class="h-12 w-auto grayscale brightness-200 contrast-125 group-hover:grayscale-0 transition-all duration-500" />
@@ -98,18 +177,25 @@ useSeoMeta({
         </div>
 
         <!-- Desktop Links -->
-        <div class="hidden lg:flex items-center gap-12 font-bold uppercase tracking-[0.2em] text-[11px]">
+        <nav class="hidden lg:flex items-center gap-12 font-bold uppercase tracking-[0.2em] text-[11px]" aria-label="Navigation secondaire">
           <a href="#about" class="hover:text-[#D4AF37] transition-colors">Vision</a>
           <a href="#services" class="hover:text-[#D4AF37] transition-colors">Expertise</a>
+          <a href="#process" class="hover:text-[#D4AF37] transition-colors">Fonctionnement</a>
           <a href="#contact" class="hover:text-[#D4AF37] transition-colors">Contact</a>
-          <div class="h-8 w-[1px] bg-white/10"></div>
-          <a href="https://wa.me/237655437070" target="_blank" class="text-white hover:text-[#D4AF37] transition-colors flex items-center gap-2 group">
+          <div class="h-8 w-[1px] bg-white/10" aria-hidden="true"></div>
+          <a href="https://wa.me/237655437070" target="_blank" class="text-white hover:text-[#D4AF37] transition-colors flex items-center gap-2 group" aria-label="WhatsApp Direct">
             WhatsApp
             <ArrowUpRight class="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
-        </div>
+        </nav>
 
-        <button @click="isMenuOpen = !isMenuOpen" class="lg:hidden text-white p-2">
+        <!-- Mobile Menu Toggle -->
+        <button 
+          @click="isMenuOpen = !isMenuOpen" 
+          class="lg:hidden text-white p-2"
+          :aria-label="isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+          :aria-expanded="isMenuOpen"
+        >
           <Menu v-if="!isMenuOpen" class="w-6 h-6" />
           <X v-else class="w-6 h-6" />
         </button>
@@ -124,85 +210,98 @@ useSeoMeta({
         leave-from-class="opacity-100 translate-x-0"
         leave-to-class="opacity-0 translate-x-full"
       >
-        <div v-if="isMenuOpen" class="fixed inset-y-0 right-0 w-full bg-[#0F172A] z-50 p-12 flex flex-col justify-center gap-12 text-center lg:hidden">
+        <div v-if="isMenuOpen" class="fixed inset-y-0 right-0 w-full bg-[#0F172A] z-50 p-12 flex flex-col justify-center gap-12 text-center lg:hidden" role="dialog" aria-modal="true" aria-label="Menu de navigation mobile">
           <a href="#about" @click="isMenuOpen = false" class="text-4xl font-serif italic text-white">Vision</a>
           <a href="#services" @click="isMenuOpen = false" class="text-4xl font-serif italic text-white">Expertise</a>
+          <a href="#process" @click="isMenuOpen = false" class="text-4xl font-serif italic text-white">Fonctionnement</a>
           <a href="#contact" @click="isMenuOpen = false" class="text-4xl font-serif italic text-white">Contact</a>
           <div class="pt-12 border-t border-white/10">
-            <a href="https://wa.me/237655437070" class="btn-bespoke py-4 block">WhatsApp Direct</a>
+            <a href="https://wa.me/237655437070" class="btn-bespoke py-4 block" aria-label="Nous contacter sur WhatsApp">WhatsApp Direct</a>
           </div>
         </div>
       </transition>
     </nav>
 
-    <!-- Hero Section: Editorial Style -->
-    <section class="relative min-h-screen flex items-center pt-24 pb-20">
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center pt-24 pb-20">
       <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         <div class="lg:col-span-8 z-10 space-y-12">
           <div class="inline-flex items-baseline gap-4">
-            <span class="h-[1px] w-12 bg-[#D4AF37]"></span>
-            <span class="text-xs font-bold tracking-[0.4em] uppercase text-[#D4AF37]">Coming Soon 2026</span>
+            <span class="h-[1px] w-12 bg-[#D4AF37]" aria-hidden="true"></span>
+            <span class="text-xs font-bold tracking-[0.4em] uppercase text-[#D4AF37]">Innovation Logistique</span>
           </div>
 
           <h1 class="text-6xl md:text-9xl font-bold leading-[0.9] text-white tracking-tighter">
-            Votre <span class="editorial-heading">pont</span><br />
-            vers l'infini.
+            L'excellence <span class="editorial-heading">sans</span><br />
+            compromis.
           </h1>
 
           <p class="text-xl md:text-2xl font-light text-slate-400 max-w-xl leading-relaxed">
-            KEMET Group redéfinit les frontières du transport et de la logistique. Une expérience sur mesure, ancrée dans la fiabilité, arrive bientôt.
+            KEMET Group transcende les standards classiques de la logistique internationale. Nous bâtissons des solutions agiles pour un monde en perpétuel mouvement.
           </p>
 
           <div class="flex flex-wrap gap-8 pt-8 items-center">
-            <a href="#contact" class="btn-bespoke">M'informer du lancement</a>
+            <a href="#contact" class="btn-bespoke" aria-label="S'inscrire pour être informé du lancement">Prendre rendez-vous</a>
             <div class="flex items-center gap-4 text-xs font-bold">
-              <span class="text-white/30 tracking-widest uppercase">Trusted By</span>
+              <span class="text-white/30 tracking-widest uppercase font-serif italic">Partenaire officiel</span>
               <span class="text-white tracking-tighter italic text-lg opacity-60">Kenya Airways</span>
             </div>
           </div>
         </div>
 
-        <!-- Asymmetric Image Placement -->
-        <div class="lg:col-span-4 relative mt-20 lg:mt-0">
-          <div class="relative w-full aspect-[3/4] overflow-hidden shadow-[30px_30px_0px_#D4AF3715]">
+        <div class="lg:col-span-4 relative mt-20 lg:mt-0" aria-hidden="true">
+          <div class="relative w-full aspect-[3/4] overflow-hidden shadow-[30px_30px_0px_#D4AF3710]">
             <img 
               src="/images/hero-bg.png" 
-              alt="Logistics Detail" 
-              class="w-full h-full object-cover grayscale brightness-75 contrast-125 hover:grayscale-0 transition-all duration-1000 ease-in-out cursor-crosshair scale-110"
+              alt="Détails logistiques montrant l'excellence opérationnelle de KEMET Group" 
+              class="w-full h-full object-cover grayscale brightness-75 transition-all duration-1000 ease-in-out cursor-crosshair scale-110"
+              loading="eager"
             />
             <div class="absolute bottom-10 -left-10 bg-[#D4AF37] text-[#0F172A] p-8 max-w-[200px] shadow-2xl">
-              <span class="text-4xl font-serif italic font-bold">99%</span>
-              <p class="text-[10px] font-bold uppercase tracking-wider mt-2">D'efficacité opérationnelle garantie.</p>
+              <span class="text-4xl font-serif italic font-bold">100%</span>
+              <p class="text-[10px] font-bold uppercase tracking-wider mt-2">D'engagement qualité sur chaque transit.</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </header>
 
     <!-- Vision Section -->
     <section id="about" class="py-32 bg-[#0F172A]/30 border-y border-white/5">
       <div class="container mx-auto px-6 md:px-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-end">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
           <div class="space-y-12">
             <h2 class="text-5xl md:text-7xl font-bold text-white tracking-tight">
-              L'excellence <br />
-              est notre <br />
-              <span class="editorial-heading">seul itinéraire.</span>
+              Un ancrage <span class="editorial-heading text-sand">local</span>,<br />
+              une puissance <br />
+              de frappe <span class="editorial-heading">globale.</span>
             </h2>
+            <div class="relative w-full aspect-video overflow-hidden border border-white/5 opacity-40">
+               <img src="/images/hero-bg.png" alt="Vue aérienne logistique" class="w-full h-full object-cover grayscale" />
+            </div>
           </div>
-          <div class="space-y-8 pb-12">
-            <p class="text-lg leading-relaxed text-slate-400">
-              KEMET Group n’est pas qu’une société de logistique. C’est un partenaire stratégique conçu pour éliminer les barrières de la distance. Que ce soit pour vos colis volumineux ou vos déplacements internationaux, nous appliquons une rigueur de haute horlogerie à chaque mouvement.
+          <div class="space-y-12 pt-12 md:pt-32">
+            <p class="text-xl leading-relaxed text-slate-300 font-light">
+              Né d’un besoin de fluidifier les échanges entre l’Afrique et les pôles économiques mondiaux, KEMET Group s’impose comme le maillon fort de votre chaîne logistique. 
             </p>
-            <div class="flex gap-12 pt-8">
-              <div class="space-y-2">
-                <span class="text-[#D4AF37] block text-2xl font-serif italic">Global</span>
-                <span class="text-[10px] font-bold uppercase tracking-widest">Couverture Afrique/Monde</span>
+            <p class="text-lg leading-relaxed text-slate-400">
+              Basée sur une expertise rigoureuse en zone franche (FZE) et un réseau opérationnel ancré au Cameroun, notre structure allie la flexibilité d'une startup à la robustesse d'un géant industriel. Nous ne livrons pas des colis, nous transportons votre confiance à travers le monde.
+            </p>
+            <div class="grid grid-cols-2 gap-12 pt-8">
+              <div class="space-y-4">
+                <Globe class="w-8 h-8 text-[#D4AF37] opacity-60" />
+                <div>
+                  <span class="text-white block font-bold tracking-widest text-[10px] uppercase mb-1">Réseau Hub</span>
+                  <span class="text-slate-500 text-sm">Dubai - Douala - International</span>
+                </div>
               </div>
-              <div class="space-y-2">
-                <span class="text-[#D4AF37] block text-2xl font-serif italic">Safe</span>
-                <span class="text-[10px] font-bold uppercase tracking-widest">Suivi certifié KMTrack</span>
+              <div class="space-y-4">
+                <ShieldCheck class="w-8 h-8 text-[#D4AF37] opacity-60" />
+                <div>
+                  <span class="text-white block font-bold tracking-widest text-[10px] uppercase mb-1">Conformité</span>
+                  <span class="text-slate-500 text-sm">Standards IATA & FZE LLC</span>
+                </div>
               </div>
             </div>
           </div>
@@ -210,34 +309,33 @@ useSeoMeta({
       </div>
     </section>
 
-    <!-- Services: Editorial Cards -->
+    <!-- Services -->
     <section id="services" class="py-40">
       <div class="container mx-auto px-6 md:px-12">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-32 border-b border-white/10 pb-12 gap-8">
           <div class="space-y-4">
             <span class="text-[#D4AF37] text-xs font-bold tracking-[0.3em] uppercase">Nos Expertises</span>
-            <h2 class="text-5xl md:text-6xl font-bold text-white tracking-tighter">Nos Solutions Groupées</h2>
+            <h2 class="text-5xl md:text-6xl font-bold text-white tracking-tighter">Au-delà du transport.</h2>
           </div>
-          <p class="max-w-xs text-sm leading-relaxed text-slate-500 font-medium">
-            Une gamme complète de services conçus pour répondre aux exigences les plus strictes de la logistique moderne.
+          <p class="max-w-xs text-sm leading-relaxed text-slate-500 font-medium italic">
+            "Une maîtrise technique de pointe pour une sérénité client absolue."
           </p>
         </div>
 
-        <div class="space-y-24">
-          <div 
+        <div class="space-y-32">
+          <article 
             v-for="(service, index) in services" 
             :key="service.title"
             class="group grid grid-cols-1 md:grid-cols-12 gap-12 items-center"
           >
-            <!-- Even/Odd layout switch -->
             <div :class="[index % 2 === 0 ? 'md:col-span-5' : 'md:col-span-5 md:order-2', 'space-y-8']">
               <span class="text-[10px] font-bold tracking-[0.5em] text-[#D4AF37] uppercase opacity-70">{{ service.tag }}</span>
-              <h3 class="text-4xl md:text-5xl font-bold text-white transition-colors group-hover:text-[#D4AF37]">{{ service.title }}</h3>
+              <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-[#D4AF37] transition-colors font-serif italic">{{ service.title }}</h3>
               <p class="text-lg leading-relaxed text-slate-400 font-light">{{ service.description }}</p>
-              <a :href="service.link" target="_blank" class="inline-flex items-center gap-4 text-white font-bold tracking-widest text-[10px] uppercase group/link">
-                Contacter un expert 
+              <a :href="service.link" target="_blank" class="inline-flex items-center gap-4 text-white font-bold tracking-widest text-[10px] uppercase group/link" :aria-label="'En savoir plus sur ' + service.title">
+                Demander un devis 
                 <div class="w-8 h-[1px] bg-[#D4AF37] group-hover/link:w-16 transition-all duration-500"></div>
-                <ChevronRight class="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
+                <ArrowUpRight class="w-3 h-3 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
               </a>
             </div>
             
@@ -245,9 +343,76 @@ useSeoMeta({
               <div class="relative overflow-hidden aspect-video bg-white/5 border border-white/10">
                 <img 
                   :src="service.image" 
-                  class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 contrast-110 brightness-75"
+                  class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-90 transition-all duration-1000 contrast-110"
+                  alt=""
                 />
-                <div class="absolute inset-0 bg-[#020617]/20 group-hover:bg-transparent transition-colors duration-500"></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Process -->
+    <section id="process" class="py-32 bg-[#D4AF37]/5 relative">
+      <div class="container mx-auto px-6 md:px-12">
+         <div class="mb-24 space-y-4 max-w-2xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tighter">Comment nous <span class="editorial-heading">opérons.</span></h2>
+            <p class="text-slate-500">Un protocole rigoureux en trois étapes pour garantir l'excellence logistique.</p>
+         </div>
+         <div class="grid grid-cols-1 md:grid-cols-3 gap-1px bg-white/5">
+            <div v-for="(step, i) in steps" :key="i" class="bg-[#020617] p-12 space-y-8 group hover:bg-white/[0.02] transition-colors">
+               <div class="text-[#D4AF37]/20 font-serif italic text-6xl">0{{ i + 1 }}</div>
+               <div class="p-4 bg-white/5 border border-white/10 w-fit rounded-full">
+                  <component :is="step.icon" class="w-6 h-6 text-[#D4AF37]" />
+               </div>
+               <h4 class="text-2xl font-bold text-white">{{ step.title }}</h4>
+               <p class="text-sm leading-relaxed text-slate-500">{{ step.description }}</p>
+            </div>
+         </div>
+      </div>
+    </section>
+
+    <!-- Refined CTA Block -->
+    <section class="py-40 bg-[#D4AF37] text-[#0F172A] relative overflow-hidden">
+      <!-- Decorative Element -->
+      <div class="absolute -right-20 -top-20 text-[20rem] font-black italic opacity-20 pointer-events-none select-none font-serif tracking-tighter">
+        KM
+      </div>
+
+      <div class="container mx-auto px-6 md:px-24 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div class="space-y-8">
+            <h2 class="text-5xl md:text-7xl font-bold leading-[1] tracking-tighter">
+              L'excellence <br />
+              au service de <br />
+              <span class="font-serif italic text-[#0F172A]/70">votre vision.</span>
+            </h2>
+            <p class="text-xl font-medium max-w-md">
+              Préparez votre prochain envoi ou voyage dès aujourd'hui. Notre équipe d'experts est à votre disposition pour une consultation personnalisée.
+            </p>
+          </div>
+          
+          <div class="relative">
+            <div class="bg-[#0F172A] p-12 shadow-3xl text-white space-y-12 border border-white/5">
+              <h3 class="text-3xl font-serif italic mb-8">Votre projet logistique commence ici.</h3>
+              <p class="text-slate-400 font-light leading-relaxed">
+                Besoin d'un devis immédiat ou d'un conseil expert ? Nos conseillers sont disponibles pour vous répondre en direct via WhatsApp.
+              </p>
+              <div class="pt-4">
+                <a 
+                  href="https://wa.me/237655437070" 
+                  target="_blank"
+                  class="btn-bespoke bg-white text-[#0F172A] hover:bg-[#D4AF37] w-full flex items-center justify-center gap-4 py-8"
+                  aria-label="Démarrer une conversation sur WhatsApp"
+                >
+                  <MessageSquare class="w-6 h-6" />
+                  <span>Démarrer la discussion</span>
+                </a>
+              </div>
+              <div class="flex items-center justify-center gap-8 pt-8 border-t border-white/5 text-[10px] font-bold uppercase tracking-widest text-white/30">
+                  <span>Réponse en moins de 15min</span>
+                  <span>7j/7</span>
               </div>
             </div>
           </div>
@@ -255,91 +420,74 @@ useSeoMeta({
       </div>
     </section>
 
-    <!-- Newsletter: High Contrast Call -->
-    <section class="py-40 bg-white text-[#0F172A] relative overflow-hidden">
-      <div class="container mx-auto px-6 md:px-24">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div class="space-y-12">
-            <h2 class="text-5xl md:text-7xl font-bold leading-tight tracking-tighter">
-              Faites partie du <br />
-              <span class="font-serif italic text-[#D4AF37]">prochain chapitre.</span>
-            </h2>
-            <p class="text-xl opacity-70 leading-relaxed font-medium">
-              Nous levons le voile très prochainement. Soyez informés avant tout le monde des offres exclusives de lancement.
-            </p>
+    <!-- FAQs / Final Population -->
+    <section class="py-32">
+       <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-24">
+          <div class="space-y-6">
+            <h5 class="text-[#D4AF37] text-xs font-bold tracking-[0.3em] uppercase">Des Questions ?</h5>
+            <p class="text-slate-400 max-w-sm mb-12">Quelques éclaircissements sur nos méthodes et notre engagement.</p>
           </div>
-          
-          <div class="relative">
-            <form @submit.prevent="handleSubmit" class="space-y-8">
-              <div class="relative group">
-                <input 
-                  v-model="email"
-                  type="email" 
-                  placeholder="votre@email.com" 
-                  required
-                  class="w-full bg-transparent border-b-2 border-[#0F172A]/10 py-8 text-2xl font-bold outline-none focus:border-[#D4AF37] transition-all placeholder:text-[#0F172A]/20"
-                />
-              </div>
-              <button 
-                type="submit" 
-                class="btn-bespoke w-full"
-                :disabled="isSubmitted"
-              >
-                {{ isSubmitted ? 'Merci pour votre confiance' : "S'inscrire à l'avant-première" }}
-              </button>
-            </form>
+          <div class="space-y-12 border-l border-white/10 pl-12">
+             <div v-for="faq in faqs" :key="faq.q" class="space-y-4">
+                <h6 class="text-white font-bold flex items-center gap-4">
+                   <HelpCircle class="w-4 h-4 text-[#D4AF37]" />
+                   {{ faq.q }}
+                </h6>
+                <p class="text-sm leading-relaxed text-slate-500 font-light ml-8">{{ faq.a }}</p>
+             </div>
           </div>
-        </div>
-      </div>
+       </div>
     </section>
 
-    <!-- Footer: Industrial Chic -->
+    <!-- Footer -->
     <footer id="contact" class="bg-[#020617] border-t border-white/5 pt-40 pb-20">
-      <div class="container mx-auto px-6 md:px-12">
+      <div class="container mx-auto px-6 md:px-12 text-center lg:text-left">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 mb-40">
           
           <div class="lg:col-span-6 space-y-12">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 items-center lg:items-start">
               <span class="text-4xl font-bold text-white tracking-widest uppercase">KEMET</span>
               <span class="text-[#D4AF37] font-bold tracking-[0.4em] uppercase text-xs">Group FZE LLC</span>
             </div>
             <div class="space-y-8">
               <div class="flex flex-col gap-2">
-                <span class="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Email</span>
-                <a href="mailto:travel@bkemet.com" class="text-2xl md:text-3xl text-white hover:text-[#D4AF37] font-serif transition-all italic underline decoration-[#D4AF37]/30">travel@bkemet.com</a>
+                <span class="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Emailing</span>
+                <a href="mailto:travel@bkemet.com" class="text-2xl md:text-3xl text-white hover:text-[#D4AF37] font-serif transition-all italic underline decoration-[#D4AF37]/10">travel@bkemet.com</a>
               </div>
               <div class="flex flex-col gap-2">
-                <span class="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Phone & WhatsApp</span>
+                <span class="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Direct Line</span>
                 <a href="tel:+237655437070" class="text-2xl md:text-3xl text-white hover:text-[#D4AF37] font-serif transition-all italic">+237 655 43 70 70</a>
               </div>
             </div>
           </div>
 
-          <div class="lg:col-span-6 grid grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="space-y-8 text-xs">
-              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40">Navigation</span>
+          <div class="lg:col-span-6 grid grid-cols-2 lg:grid-cols-3 gap-12 text-left">
+            <div class="space-y-8 text-[10px]">
+              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40 block">Navigation</span>
               <ul class="space-y-4 font-bold uppercase tracking-widest text-[#94a3b8]">
-                <li><a href="#" class="hover:text-white">Accueil</a></li>
-                <li><a href="#about" class="hover:text-white">Vision</a></li>
-                <li><a href="#services" class="hover:text-white">Expertise</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Accueil</a></li>
+                <li><a href="#about" class="hover:text-white transition-colors">Vision</a></li>
+                <li><a href="#services" class="hover:text-white transition-colors">Expertise</a></li>
+                <li><a href="#process" class="hover:text-white transition-colors">Processus</a></li>
               </ul>
             </div>
             
-            <div class="space-y-8 text-xs">
-              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40">Social</span>
+            <div class="space-y-8 text-[10px]">
+              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40 block">Presence</span>
               <ul class="space-y-4 font-bold uppercase tracking-widest text-[#94a3b8]">
-                <li><a href="#" class="hover:text-white">Linkedin</a></li>
-                <li><a href="#" class="hover:text-white">Instagram</a></li>
-                <li><a href="#" class="hover:text-white">Facebook</a></li>
+                <li><a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn Profile">Linkedin</a></li>
+                <li><a href="#" class="hover:text-white transition-colors" aria-label="Instagram Profile">Instagram</a></li>
+                <li><a href="#" class="hover:text-white transition-colors" aria-label="Facebook Page">Facebook</a></li>
               </ul>
             </div>
 
-            <div class="space-y-8 text-xs col-span-2 lg:col-span-1">
-              <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40">Addresse</span>
-              <p class="font-bold uppercase tracking-widest text-[#94a3b8] leading-relaxed">
-                Douala, Cameroun<br />
-                FZE LLC Registration
-              </p>
+            <div class="space-y-8 text-[10px] col-span-2 lg:col-span-1">
+               <span class="font-bold text-white uppercase tracking-[0.3em] opacity-40 block">Legal Entity</span>
+               <p class="font-bold uppercase tracking-widest text-slate-500 leading-relaxed">
+                  KEMET GROUP FZE LLC<br />
+                  Logistics License #2026<br />
+                  Registration: UAE & CMR
+               </p>
             </div>
           </div>
         </div>
@@ -348,19 +496,19 @@ useSeoMeta({
           <p class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">
             &copy; {{ new Date().getFullYear() }} KEMET Group. Excellence since inception.
           </p>
-          <div class="flex gap-12 grayscale opacity-40 hover:opacity-100 transition-all duration-1000">
-             <span class="text-sm font-black italic tracking-tighter text-white">OFFICIAL PARTNER OF KENYA AIRWAYS</span>
+          <div class="flex gap-12 items-center opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+             <span class="text-sm font-black italic tracking-tighter text-white">Kenya Airways Partner</span>
           </div>
           <div class="flex gap-8 text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">
-            <a href="#" class="hover:opacity-100">Privacy</a>
-            <a href="#" class="hover:opacity-100">Legal</a>
+            <a href="#" class="hover:opacity-100 transition-opacity">Privacy Policy</a>
+            <a href="#" class="hover:opacity-100 transition-opacity">Terms of Service</a>
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Floating Global Connection Marker -->
-    <div class="fixed bottom-12 left-12 z-50 hidden md:block group cursor-none">
+    <!-- Floating Global Marker -->
+    <div class="fixed bottom-12 left-12 z-50 hidden md:block group cursor-none" aria-hidden="true">
       <div class="w-12 h-12 border border-[#D4AF37]/30 flex items-center justify-center transform group-hover:rotate-45 transition-all duration-700">
           <Globe class="w-4 h-4 text-[#D4AF37]" />
       </div>
