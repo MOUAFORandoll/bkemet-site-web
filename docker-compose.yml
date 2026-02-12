@@ -1,0 +1,18 @@
+services:
+     pesabora_rest:
+          build: .
+          env_file:
+               - .env
+          ports:
+               - '9091:8080'
+          environment:
+               - NODE_ENV=production
+               - PORT_MAIN=8080
+          restart: always
+          networks:
+               - default
+               - proxy
+
+networks:
+  proxy:
+    external: true
