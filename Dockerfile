@@ -1,35 +1,34 @@
-# Base Image
+# ======================
+# Build stage
+# ======================
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package.json and related files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-
-# Copy source code
 COPY . .
 
-# Build the application
 RUN npm run build
 
-# Production Image
-FROM node:20-alpine AS runner
+
+# ======================
+# Run stage
+# ======================
+FROM node:20-alpine
 
 WORKDIR /app
 
 ENV NODE_ENV=production
-# Default ports, can be overridden
-ENV PORT_MAIN=8080
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+ENV PORT=3000
 
-# Expose ports
-EXPOSE 8080
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/package*.json ./
 
-# Start the application
-CMD ["node", "dist/main"]
+RUN npm install --production
+
+EXPOSE 3000
+
+CMD ["node", ".output/server/index.mjs"]
+
